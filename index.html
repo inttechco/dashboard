@@ -3,94 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RE Intelligence Dashboard</title>
+    <title>KW Southern Tier Intelligence</title>
     <style>
-        :root { --kw-red: #ED1C24; --bg-dark: #1a1a1a; --card-bg: #262626; --text-main: #e0e0e0; --gray: #828282; }
-        body { background-color: var(--bg-dark); color: var(--text-main); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 20px; }
-        .header { border-bottom: 3px solid var(--kw-red); padding-bottom: 10px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .card { background: var(--card-bg); padding: 15px; border-radius: 8px; border-left: 4px solid var(--gray); position: relative; }
-        .card.active { border-left-color: var(--kw-red); }
-        .metric-group { margin-bottom: 15px; }
-        .metric-row { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid #333; }
-        .label { color: var(--gray); font-size: 0.9rem; }
-        .value { font-weight: bold; font-family: monospace; color: #fff; }
-        .info-btn { position: absolute; top: 10px; right: 10px; color: var(--kw-red); cursor: help; font-style: italic; border: 1px solid var(--kw-red); border-radius: 50%; width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; font-size: 12px; }
-        .chart-container { height: 300px; margin-top: 10px; border-radius: 4px; overflow: hidden; }
-        .market-tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; margin-top: 5px; }
-        .seller { background: #2e7d32; color: white; }
-        .buyer { background: #c62828; color: white; }
+        :root { --kw-red: #ED1C24; --bg-dark: #121212; --card-bg: #1e1e1e; --text: #ffffff; --text-dim: #b3b3b3; --border: #333; }
+        body { background-color: var(--bg-dark); color: var(--text); font-family: 'Inter', sans-serif; margin: 0; padding: 20px; }
+        .header { border-bottom: 2px solid var(--kw-red); padding-bottom: 10px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: baseline; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr 1fr 350px; gap: 15px; }
+        .card { background: var(--card-bg); padding: 20px; border-radius: 4px; border: 1px solid var(--border); position: relative; }
+        .card h3 { color: var(--kw-red); margin-top: 0; font-size: 1.1rem; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+        .metric { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #2a2a2a; }
+        .label { color: var(--text-dim); font-size: 0.85rem; }
+        .value { font-weight: 600; font-family: 'Courier New', monospace; }
+        .info-icon { cursor: help; color: var(--kw-red); border: 1px solid var(--kw-red); border-radius: 50%; width: 16px; height: 16px; display: inline-flex; align-items: center; justify-content: center; font-size: 10px; float: right; }
+        .chart-box { grid-column: span 3; background: var(--card-bg); height: 450px; border-radius: 4px; overflow: hidden; border: 1px solid var(--border); }
+        .sidebar { grid-column: 4; grid-row: 1 / 3; }
+        .status-tag { display: inline-block; padding: 4px 10px; border-radius: 2px; font-size: 0.7rem; font-weight: bold; margin-top: 10px; text-transform: uppercase; }
+        .seller { background: #1b5e20; color: #fff; }
+        @media (max-width: 1200px) { .grid { grid-template-columns: 1fr 1fr; } .sidebar { grid-column: span 2; } .chart-box { grid-column: span 2; } }
     </style>
 </head>
 <body>
 
 <div class="header">
-    <h1>MARKET INTELLIGENCE <span style="color:var(--kw-red)">NY-SOUTH</span></h1>
-    <div id="clock" style="font-family: monospace;"></div>
+    <h1 style="margin:0;">REAL ESTATE <span style="font-weight:200;">DASHBOARD</span></h1>
+    <div id="clock" style="color: var(--text-dim);"></div>
 </div>
 
 <div class="grid">
-    <!-- COUNTY 1: CHEMUNG -->
-    <div class="card active">
-        <div class="info-btn" title="Source: NYSAR / MLS Data">i</div>
+    <!-- COUNTY BOXES -->
+    <div class="card">
+        <div class="info-icon" title="Days on Market & Inventory levels for Chemung">i</div>
         <h3>CHEMUNG COUNTY</h3>
-        <div class="metric-group">
-            <div class="metric-row"><span class="label">New Listings</span><span class="value">42</span></div>
-            <div class="metric-row"><span class="label">Pending</span><span class="value">38</span></div>
-            <div class="metric-row"><span class="label">Expired</span><span class="value">5</span></div>
-            <div class="metric-row"><span class="label">Avg DOM</span><span class="value">28 Days</span></div>
-            <div class="metric-row"><span class="label">Months Supply</span><span class="value">3.2</span></div>
-            <div class="market-tag seller">STRONG SELLER'S MARKET</div>
-        </div>
+        <div class="metric"><span class="label">New / Pending</span><span class="value">45 / 32</span></div>
+        <div class="metric"><span class="label">Expired</span><span class="value">12</span></div>
+        <div class="metric"><span class="label">Avg DOM</span><span class="value">24 Days</span></div>
+        <div class="metric"><span class="label">Months Supply</span><span class="value">2.8</span></div>
+        <div class="status-tag seller">Strong Seller Market</div>
     </div>
 
-    <!-- COUNTY 2: STEUBEN -->
-    <div class="card active">
-        <div class="info-btn" title="Source: NYSAR / MLS Data">i</div>
+    <div class="card">
+        <div class="info-icon" title="Days on Market & Inventory levels for Steuben">i</div>
         <h3>STEUBEN COUNTY</h3>
-        <div class="metric-group">
-            <div class="metric-row"><span class="label">New Listings</span><span class="value">31</span></div>
-            <div class="metric-row"><span class="label">Pending</span><span class="value">24</span></div>
-            <div class="metric-row"><span class="label">Expired</span><span class="value">8</span></div>
-            <div class="metric-row"><span class="label">Avg DOM</span><span class="value">45 Days</span></div>
-            <div class="metric-row"><span class="label">Months Supply</span><span class="value">4.1</span></div>
-            <div class="market-tag seller">SELLER'S MARKET</div>
+        <div class="metric"><span class="label">New / Pending</span><span class="value">28 / 19</span></div>
+        <div class="metric"><span class="label">Expired</span><span class="value">8</span></div>
+        <div class="metric"><span class="label">Avg DOM</span><span class="value">41 Days</span></div>
+        <div class="metric"><span class="label">Months Supply</span><span class="value">3.5</span></div>
+        <div class="status-tag seller">Seller Market</div>
+    </div>
+
+    <div class="card">
+        <div class="info-icon" title="Days on Market & Inventory levels for Schuyler">i</div>
+        <h3>SCHUYLER COUNTY</h3>
+        <div class="metric"><span class="label">New / Pending</span><span class="value">14 / 9</span></div>
+        <div class="metric"><span class="label">Expired</span><span class="value">3</span></div>
+        <div class="metric"><span class="label">Avg DOM</span><span class="value">52 Days</span></div>
+        <div class="metric"><span class="label">Months Supply</span><span class="value">4.2</span></div>
+        <div class="status-tag seller">Balanced/Seller</div>
+    </div>
+
+    <!-- MORTGAGE WATCH SIDEBAR -->
+    <div class="card sidebar">
+        <h3>MORTGAGE WATCH</h3>
+        <div class="metric"><span class="label">30-YR Fixed</span><span class="value">6.98%</span></div>
+        <div class="metric"><span class="label">15-YR Fixed</span><span class="value">6.23%</span></div>
+        <div class="metric"><span class="label">FHA 30-YR</span><span class="value">6.55%</span></div>
+        <div class="metric"><span class="label">VA 30-YR</span><span class="value">6.52%</span></div>
+        <div class="metric"><span class="label">ARM 5/1</span><span class="value">6.85%</span></div>
+        <br>
+        <h3 style="color: var(--text-dim); font-size: 0.9rem;">BOND YIELDS</h3>
+        <div class="metric"><span class="label">10Y Treasury</span><span class="value">4.45%</span></div>
+        <div class="metric"><span class="label">30Y Treasury</span><span class="value">4.61%</span></div>
+        
+        <div style="margin-top:20px; font-size:0.8rem; color:var(--text-dim); line-height:1.4;">
+            <strong style="color:var(--kw-red);">Note:</strong> If 10Y Yield spikes, lock rates. If the gap between 30YR and 10Y is >2%, market is volatile.
         </div>
     </div>
 
-    <!-- LIVE NATIONAL RATES -->
-    <div class="card" style="grid-column: span 2;">
-        <div class="info-btn" title="Live Spread: 30Y Mtg vs 10Y Treasury">i</div>
-        <h3>MORTGAGE SPREAD ANALYSIS</h3>
-        <div class="chart-container">
-            <!-- TradingView Widget BEGIN -->
-            <div class="tradingview-widget-container">
-                <div id="tradingview_spread"></div>
-                <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-                <script type="text/javascript">
-                new TradingView.widget({
-                  "width": "100%", "height": 300,
-                  "symbol": "FRED:MORTGAGE30US-TVC:US10Y",
-                  "interval": "D", "timezone": "Etc/UTC",
-                  "theme": "dark", "style": "3", "locale": "en",
-                  "enable_publishing": false, "hide_top_toolbar": true,
-                  "save_image": false, "container_id": "tradingview_spread"
-                });
-                </script>
-            </div>
-            <!-- TradingView Widget END -->
+    <!-- CHART AREA -->
+    <div class="chart-box">
+        <!-- TradingView Widget BEGIN -->
+        <div class="tradingview-widget-container" style="height:100%;width:100%">
+          <div id="tradingview_12345" style="height:calc(100% - 32px);width:100%"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+          <script type="text/javascript">
+          new TradingView.MediumWidget({
+          "symbols": [ ["10Y Yield", "TVC:US10Y|1D"], ["30Y Yield", "TVC:US30Y|1D"], ["30Y Mortgage", "FRED:MORTGAGE30US|1D"] ],
+          "chartOnly": false, "width": "100%", "height": "100%", "locale": "en", "gridLineColor": "rgba(240, 243, 250, 0.06)",
+          "fontColor": "#787b86", "underLineColor": "rgba(237, 28, 36, 0.15)", "underLineBottomColor": "rgba(237, 28, 36, 0)",
+          "trendLineColor": "#ed1c24", "width": "100%", "height": "100%", "container_id": "tradingview_12345"
+        });
+          </script>
         </div>
+        <!-- TradingView Widget END -->
     </div>
 </div>
 
 <script>
     function updateClock() {
         const now = new Date();
-        document.getElementById('clock').innerText = now.toLocaleString();
+        document.getElementById('clock').innerText = now.toLocaleString('en-US', { hour12: true, hour: 'numeric', minute: 'numeric', second: 'numeric', month: 'short', day: 'numeric' });
     }
     setInterval(updateClock, 1000);
     updateClock();
 </script>
-
 </body>
 </html>
