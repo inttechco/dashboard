@@ -5,69 +5,81 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NY Real Estate Command Center</title>
     <style>
-        :root { --kw-red: #ED1C24; --bg: #121212; --card: #1c1c1c; --text: #e0e0e0; }
-        body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif; margin: 0; padding: 15px; }
-        .header { border-bottom: 2px solid var(--kw-red); padding-bottom: 10px; margin-bottom: 20px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
-        .card { background: var(--card); padding: 15px; border-radius: 8px; border: 1px solid #333; height: 500px; overflow: hidden; position: relative; }
-        .card h3 { color: var(--kw-red); font-size: 1rem; margin-top: 0; text-transform: uppercase; border-bottom: 1px solid #333; padding-bottom: 10px; }
-        .source-footer { position: absolute; bottom: 10px; left: 15px; font-size: 11px; color: var(--kw-red); text-decoration: underline; }
-        .chart-main { grid-column: 1 / -1; height: 600px; border: 1px solid #333; border-radius: 8px; overflow: hidden; margin-top: 20px; }
+        :root { --kw-red: #ED1C24; --bg: #0a0a0a; --card: #161616; --text: #f0f0f0; }
+        body { background: var(--bg); color: var(--text); font-family: 'Helvetica Neue', Arial, sans-serif; margin: 0; padding: 20px; }
+        .header { border-bottom: 3px solid var(--kw-red); margin-bottom: 25px; padding-bottom: 10px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; }
+        .card { background: var(--card); border: 1px solid #333; border-radius: 10px; padding: 15px; position: relative; min-height: 450px; }
+        h3 { color: var(--kw-red); font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; margin-top: 0; border-bottom: 1px solid #222; padding-bottom: 10px; }
+        .chart-container { height: 600px; grid-column: 1 / -1; border: 1px solid #333; border-radius: 10px; overflow: hidden; }
+        iframe { border: none; width: 100%; border-radius: 5px; }
+        .source-tag { font-size: 10px; color: #666; margin-top: 10px; display: block; text-decoration: none; }
     </style>
 </head>
 <body>
 
 <div class="header">
-    <h1>NY REAL ESTATE COMMAND CENTER</h1>
+    <h1 style="margin:0; font-size: 1.8rem;">NY REAL ESTATE COMMAND CENTER</h1>
 </div>
 
 <div class="grid">
+    <!-- INDUSTRY STANDARD MORTGAGE RATES (MND LIVE WIDGET) -->
     <div class="card">
-        <h3>Live Mortgage Rates (National)</h3>
-        <iframe src="https://research.stlouisfed.org/fred-glance-widget.php?seriesid=MORTGAGE30US,MORTGAGE15US,MORTGAGE5US,DFII10&title=Mortgage%20Trends&width=300&height=400" 
-                style="border:none; width:100%; height:420px;" scrolling="no"></iframe>
-        <a href="https://www.mortgagenewsdaily.com/mortgage-rates" target="_blank" class="source-footer">Verify on Mortgage News Daily</a>
+        <h3>National Daily Mortgage Rates</h3>
+        <iframe src="https://www.mortgagenewsdaily.com/widgets/rates/large" height="400"></iframe>
+        <a href="https://www.mortgagenewsdaily.com/mortgage-rates" target="_blank" class="source-tag">Live Data via Mortgage News Daily</a>
     </div>
 
+    <!-- TREASURY YIELDS (TRADINGVIEW SYMBOL OVERVIEW) -->
     <div class="card">
-        <h3>Live Treasury Yields</h3>
+        <h3>Live Treasury Yields (10Y & 30Y)</h3>
         <div class="tradingview-widget-container">
             <div class="tradingview-widget-container__widget"></div>
             <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
             {
               "symbols": [ ["10Y Yield", "TVC:US10Y|1D"], ["30Y Yield", "TVC:US30Y|1D"] ],
               "chartOnly": false, "width": "100%", "height": 400, "locale": "en", "colorTheme": "dark",
-              "autosize": false, "showVolume": false, "showMA": false, "hideDateRanges": false, "hideMarketStatus": false,
-              "hideSymbolLogo": false, "scalePosition": "right", "scaleMode": "Normal", "fontFamily": "-apple-system, BlinkMacSystemFont, Trebuchet MS, Roboto, Ubuntu, sans-serif",
-              "fontSize": "10", "noOverlappingLabels": false, "valuesTracking": "1", "changeMode": "price-and-percent", "chartType": "area"
+              "autosize": false, "showVolume": false, "hideDateRanges": false, "scalePosition": "right",
+              "scaleMode": "Normal", "fontFamily": "Arial", "fontSize": "10", "chartType": "area"
             }
             </script>
         </div>
-        <a href="https://www.marketwatch.com/investing/bonds" target="_blank" class="source-footer">Verify on MarketWatch</a>
+        <a href="https://www.marketwatch.com/investing/bond/tmubmusd10y?countrycode=bx" target="_blank" class="source-tag">Verify on MarketWatch</a>
     </div>
 
+    <!-- LOCAL NY MARKET DATA (FRED OFFICIAL LINKS) -->
     <div class="card">
-        <h3>Days on Market (Local NY)</h3>
-        <p style="font-size: 13px; color: #888;">This panel links to the live Federal Reserve database for your counties. It tracks "Median Days on Market" from Realtor.com data.</p>
-        <ul style="font-size: 14px; line-height: 2;">
-            <li><a href="https://fred.stlouisfed.org/series/MEDDAYONMAR16015" target="_blank" style="color:#fff;">Chemung County DOM</a></li>
-            <li><a href="https://fred.stlouisfed.org/series/MEDDAYONMAR16101" target="_blank" style="color:#fff;">Steuben County DOM</a></li>
-            <li><a href="https://fred.stlouisfed.org/series/MEDDAYONMAR16097" target="_blank" style="color:#fff;">Schuyler County DOM</a></li>
+        <h3>Local Market: Days on Market</h3>
+        <p style="font-size: 14px; color: #bbb;">Click to view real-time charts directly from the St. Louis Fed:</p>
+        <ul style="line-height: 2.5;">
+            <li><a href="https://fred.stlouisfed.org/series/MEDDAYONMAR16015" target="_blank" style="color:var(--kw-red); font-weight:bold;">Chemung County DOM</a></li>
+            <li><a href="https://fred.stlouisfed.org/series/MEDDAYONMAR16101" target="_blank" style="color:var(--kw-red); font-weight:bold;">Steuben County DOM</a></li>
+            <li><a href="https://fred.stlouisfed.org/series/MEDDAYONMAR16097" target="_blank" style="color:var(--kw-red); font-weight:bold;">Schuyler County DOM</a></li>
         </ul>
-        <div style="margin-top: 20px; font-size: 12px; border-top: 1px solid #333; padding-top: 10px;">
-            <strong style="color:var(--kw-red);">Note:</strong> These links open the real-time FRED charts for each county.
+        <div style="margin-top: 20px; font-size: 12px; background: #222; padding: 10px; border-radius: 5px;">
+            <strong>Note:</strong> If links show "404", FRED has rotated the series ID. Use the footer link to search current New York inventory.
         </div>
+        <a href="https://fred.stlouisfed.org/search/results?st=days+on+market+new+york" target="_blank" class="source-tag">Search all NY Counties on FRED</a>
     </div>
 
-    <div class="chart-main">
+    <!-- THE LIVE 10Y CHART (FIXED EMBED) -->
+    <div class="chart-container">
         <div class="tradingview-widget-container" style="height:100%;width:100%">
-          <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%"></div>
-          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
-          {
-          "autosize": true, "symbol": "TVC:US10Y", "interval": "D", "timezone": "Etc/UTC", "theme": "dark", "style": "1",
-          "locale": "en", "enable_publishing": false, "allow_symbol_change": true, "calendar": false, "support_host": "https://www.tradingview.com"
-        }
-          </script>
+            <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+            {
+              "autosize": true,
+              "symbol": "TVC:US10Y",
+              "interval": "D",
+              "timezone": "Etc/UTC",
+              "theme": "dark",
+              "style": "1",
+              "locale": "en",
+              "enable_publishing": false,
+              "allow_symbol_change": true,
+              "support_host": "https://www.tradingview.com"
+            }
+            </script>
         </div>
     </div>
 </div>
