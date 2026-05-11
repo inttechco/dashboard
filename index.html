@@ -8,12 +8,11 @@
         :root { --kw-red: #ED1C24; --bg: #0a0a0a; --card: #161616; --text: #f0f0f0; }
         body { background: var(--bg); color: var(--text); font-family: 'Helvetica Neue', Arial, sans-serif; margin: 0; padding: 20px; }
         .header { border-bottom: 3px solid var(--kw-red); margin-bottom: 25px; padding-bottom: 10px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; }
-        .card { background: var(--card); border: 1px solid #333; border-radius: 10px; padding: 15px; position: relative; min-height: 450px; }
-        h3 { color: var(--kw-red); font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; margin-top: 0; border-bottom: 1px solid #222; padding-bottom: 10px; }
-        .chart-container { height: 600px; grid-column: 1 / -1; border: 1px solid #333; border-radius: 10px; overflow: hidden; }
-        iframe { border: none; width: 100%; border-radius: 5px; }
-        .source-tag { font-size: 10px; color: #666; margin-top: 10px; display: block; text-decoration: none; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 20px; }
+        .card { background: var(--card); border: 1px solid #333; border-radius: 10px; padding: 15px; position: relative; min-height: 480px; }
+        h3 { color: var(--kw-red); font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; margin: 0 0 15px 0; border-bottom: 1px solid #222; padding-bottom: 10px; }
+        .chart-container { height: 600px; grid-column: 1 / -1; border: 1px solid #333; border-radius: 10px; overflow: hidden; margin-top: 10px; }
+        .source-tag { font-size: 10px; color: #666; margin-top: 10px; display: block; text-decoration: none; text-align: center; }
     </style>
 </head>
 <body>
@@ -23,64 +22,67 @@
 </div>
 
 <div class="grid">
-    <!-- INDUSTRY STANDARD MORTGAGE RATES (MND LIVE WIDGET) -->
+    <!-- MORTGAGE NEWS DAILY - DARK MODE RATES WIDGET -->
     <div class="card">
-        <h3>National Daily Mortgage Rates</h3>
-        <iframe src="https://www.mortgagenewsdaily.com/widgets/rates/large" height="400"></iframe>
-        <a href="https://www.mortgagenewsdaily.com/mortgage-rates" target="_blank" class="source-tag">Live Data via Mortgage News Daily</a>
+        <h3>Live Mortgage Rates (MND Benchmark)</h3>
+        <div class="mnd-rates-widget" style="width: 100%; height: 380px;">
+            <iframe src="https://widgets.mortgagenewsdaily.com/widget/f/rates?t=large&sn=true&c=ED1C24&u=&cbu=&w=380&h=340&bgc=161616&tc=f0f0f0" 
+                    width="100%" height="350" frameborder="0" scrolling="no" style="display:block; border: none; border-radius: 8px;"></iframe>
+            <a href="https://www.mortgagenewsdaily.com/mortgage-rates" target="_blank" class="source-tag">Live Market Data via Mortgage News Daily</a>
+        </div>
     </div>
 
-    <!-- TREASURY YIELDS (TRADINGVIEW SYMBOL OVERVIEW) -->
+    <!-- TREASURY YIELDS LIST (TRADINGVIEW) -->
     <div class="card">
-        <h3>Live Treasury Yields (10Y & 30Y)</h3>
+        <h3>Current Treasury Yields</h3>
         <div class="tradingview-widget-container">
             <div class="tradingview-widget-container__widget"></div>
             <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
             {
               "symbols": [ ["10Y Yield", "TVC:US10Y|1D"], ["30Y Yield", "TVC:US30Y|1D"] ],
-              "chartOnly": false, "width": "100%", "height": 400, "locale": "en", "colorTheme": "dark",
+              "chartOnly": false, "width": "100%", "height": 380, "locale": "en", "colorTheme": "dark",
               "autosize": false, "showVolume": false, "hideDateRanges": false, "scalePosition": "right",
               "scaleMode": "Normal", "fontFamily": "Arial", "fontSize": "10", "chartType": "area"
             }
             </script>
         </div>
-        <a href="https://www.marketwatch.com/investing/bond/tmubmusd10y?countrycode=bx" target="_blank" class="source-tag">Verify on MarketWatch</a>
+        <a href="https://www.marketwatch.com/investing/bond/tmubmusd10y?countrycode=bx" target="_blank" class="source-tag">Verify Real-Time Bonds on MarketWatch</a>
     </div>
 
-    <!-- LOCAL NY MARKET DATA (FRED OFFICIAL LINKS) -->
+    <!-- LOCAL NY MARKET DATA (FRED VERIFIED LINKS) -->
     <div class="card">
         <h3>Local Market: Days on Market</h3>
-        <p style="font-size: 14px; color: #bbb;">Click to view real-time charts directly from the St. Louis Fed:</p>
-        <ul style="line-height: 2.5;">
-            <li><a href="https://fred.stlouisfed.org/series/MEDDAYONMAR16015" target="_blank" style="color:var(--kw-red); font-weight:bold;">Chemung County DOM</a></li>
-            <li><a href="https://fred.stlouisfed.org/series/MEDDAYONMAR16101" target="_blank" style="color:var(--kw-red); font-weight:bold;">Steuben County DOM</a></li>
-            <li><a href="https://fred.stlouisfed.org/series/MEDDAYONMAR16097" target="_blank" style="color:var(--kw-red); font-weight:bold;">Schuyler County DOM</a></li>
+        <p style="font-size: 14px; color: #bbb; margin-bottom: 25px;">Live data pulls directly from the St. Louis Federal Reserve (FRED) database:</p>
+        <ul style="line-height: 3; list-style: none; padding: 0;">
+            <li><a href="https://fred.stlouisfed.org/series/MEDDAYONMAR36015" target="_blank" style="color:var(--kw-red); font-weight:bold; text-decoration: none;">➔ Chemung County DOM (Series: 36015)</a></li>
+            <li><a href="https://fred.stlouisfed.org/series/MEDDAYONMAR36101" target="_blank" style="color:var(--kw-red); font-weight:bold; text-decoration: none;">➔ Steuben County DOM (Series: 36101)</a></li>
+            <li><a href="https://fred.stlouisfed.org/series/MEDDAYONMAR36097" target="_blank" style="color:var(--kw-red); font-weight:bold; text-decoration: none;">➔ Schuyler County DOM (Series: 36097)</a></li>
         </ul>
-        <div style="margin-top: 20px; font-size: 12px; background: #222; padding: 10px; border-radius: 5px;">
-            <strong>Note:</strong> If links show "404", FRED has rotated the series ID. Use the footer link to search current New York inventory.
+        <div style="margin-top: 30px; font-size: 11px; background: #222; padding: 15px; border-radius: 5px; color: #888;">
+            <strong>Verification Note:</strong> These links use the official NY Census Codes. If a chart is missing, FRED is currently recalculating the monthly inventory.
         </div>
-        <a href="https://fred.stlouisfed.org/search/results?st=days+on+market+new+york" target="_blank" class="source-tag">Search all NY Counties on FRED</a>
     </div>
 
-    <!-- THE LIVE 10Y CHART (FIXED EMBED) -->
+    <!-- THE LIVE 10Y CHART (CANDLESTICKS) -->
     <div class="chart-container">
-        <div class="tradingview-widget-container" style="height:100%;width:100%">
-            <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%"></div>
-            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
-            {
-              "autosize": true,
-              "symbol": "TVC:US10Y",
-              "interval": "D",
-              "timezone": "Etc/UTC",
-              "theme": "dark",
-              "style": "1",
-              "locale": "en",
-              "enable_publishing": false,
-              "allow_symbol_change": true,
-              "support_host": "https://www.tradingview.com"
-            }
-            </script>
-        </div>
+        <div id="tv-chart-10y" style="height:100%; width:100%;"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+        <script type="text/javascript">
+        new TradingView.widget({
+          "autosize": true,
+          "symbol": "TVC:US10Y",
+          "interval": "D",
+          "timezone": "Etc/UTC",
+          "theme": "dark",
+          "style": "1",
+          "locale": "en",
+          "toolbar_bg": "#f1f3f6",
+          "enable_publishing": false,
+          "hide_side_toolbar": false,
+          "allow_symbol_change": true,
+          "container_id": "tv-chart-10y"
+        });
+        </script>
     </div>
 </div>
 
