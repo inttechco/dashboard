@@ -8,77 +8,67 @@
         :root { --kw-red: #ED1C24; --bg: #121212; --card: #1c1c1c; --text: #e0e0e0; }
         body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif; margin: 0; padding: 15px; }
         .header { border-bottom: 2px solid var(--kw-red); padding-bottom: 10px; margin-bottom: 20px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; }
-        .card { background: var(--card); padding: 20px; border-radius: 8px; border: 1px solid #333; position: relative; }
-        .card h3 { margin: 0 0 15px 0; color: var(--kw-red); font-size: 1rem; text-transform: uppercase; border-bottom: 1px solid #333; padding-bottom: 5px; }
-        .row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px dotted #444; }
-        .val { font-family: monospace; font-weight: bold; color: #fff; }
-        .source-btn { position: absolute; top: 15px; right: 15px; font-size: 10px; color: var(--kw-red); text-decoration: none; border: 1px solid var(--kw-red); padding: 2px 6px; border-radius: 3px; }
-        .info-btn { color: #ED1C24; font-weight: bold; cursor: help; margin-left: 5px; }
-        .chart-main { grid-column: 1 / -1; height: 600px; background: var(--card); border-radius: 8px; border: 1px solid #333; margin-top: 15px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+        .card { background: var(--card); padding: 15px; border-radius: 8px; border: 1px solid #333; height: 500px; overflow: hidden; position: relative; }
+        .card h3 { color: var(--kw-red); font-size: 1rem; margin-top: 0; text-transform: uppercase; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        .source-footer { position: absolute; bottom: 10px; left: 15px; font-size: 11px; color: var(--kw-red); text-decoration: underline; }
+        .chart-main { grid-column: 1 / -1; height: 600px; border: 1px solid #333; border-radius: 8px; overflow: hidden; margin-top: 20px; }
     </style>
 </head>
 <body>
 
 <div class="header">
-    <h1 style="margin:0;">NY REAL ESTATE COMMAND CENTER</h1>
+    <h1>NY REAL ESTATE COMMAND CENTER</h1>
 </div>
 
 <div class="grid">
-    <!-- MORTGAGE RATES (AUTOMATED VIA FRED) -->
     <div class="card">
-        <a href="https://fred.stlouisfed.org/categories/114" target="_blank" class="source-btn">FRED</a>
-        <h3>Mortgage Rates (Current)</h3>
-        <div class="row"><span>30-Year Fixed</span><span class="val">6.25%</span></div>
-        <div class="row"><span>15-Year Fixed</span><span class="val">5.75%</span></div>
-        <div class="row"><span>FHA 30-Year</span><span class="val">6.00%</span></div>
-        <div class="row"><span>VA 30-Year</span><span class="val">5.88%</span></div>
-        <div class="row"><span>7/6 ARM</span><span class="val">6.63%</span></div>
+        <h3>Live Mortgage Rates (National)</h3>
+        <iframe src="https://research.stlouisfed.org/fred-glance-widget.php?seriesid=MORTGAGE30US,MORTGAGE15US,MORTGAGE5US,DFII10&title=Mortgage%20Trends&width=300&height=400" 
+                style="border:none; width:100%; height:420px;" scrolling="no"></iframe>
+        <a href="https://www.mortgagenewsdaily.com/mortgage-rates" target="_blank" class="source-footer">Verify on Mortgage News Daily</a>
     </div>
 
-    <!-- MARKET TRACKER (YIELDS) -->
     <div class="card">
-        <a href="https://www.marketwatch.com/investing/bonds" target="_blank" class="source-btn">WATCH</a>
-        <h3>Treasury Yields <span class="info-btn" title="Live data pulled from TradingView widget below.">ⓘ</span></h3>
-        <div class="row"><span>10-Year Yield</span><span class="val">4.39%</span></div>
-        <div class="row"><span>30-Year Yield</span><span class="val">4.98%</span></div>
-        <div style="font-size: 0.7rem; color: #888; margin-top: 10px;">Refreshes live via Chart Widget.</div>
+        <h3>Live Treasury Yields</h3>
+        <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+            {
+              "symbols": [ ["10Y Yield", "TVC:US10Y|1D"], ["30Y Yield", "TVC:US30Y|1D"] ],
+              "chartOnly": false, "width": "100%", "height": 400, "locale": "en", "colorTheme": "dark",
+              "autosize": false, "showVolume": false, "showMA": false, "hideDateRanges": false, "hideMarketStatus": false,
+              "hideSymbolLogo": false, "scalePosition": "right", "scaleMode": "Normal", "fontFamily": "-apple-system, BlinkMacSystemFont, Trebuchet MS, Roboto, Ubuntu, sans-serif",
+              "fontSize": "10", "noOverlappingLabels": false, "valuesTracking": "1", "changeMode": "price-and-percent", "chartType": "area"
+            }
+            </script>
+        </div>
+        <a href="https://www.marketwatch.com/investing/bonds" target="_blank" class="source-footer">Verify on MarketWatch</a>
     </div>
 
-    <!-- COUNTY DAYS ON MARKET -->
     <div class="card">
-        <a href="https://fred.stlouisfed.org/release/tables?rid=462&eid=1127027" target="_blank" class="source-btn">DOM DATA</a>
-        <h3>Avg. Days on Market</h3>
-        <div class="row"><span>Chemung County</span><span class="val">70 Days</span></div>
-        <div class="row"><span>Steuben County</span><span class="val">94 Days</span></div>
-        <div class="row"><span>Schuyler County</span><span class="val">52 Days</span></div>
-        <div style="font-size: 0.7rem; color: #888; margin-top: 10px;">Source: FRED/Realtor.com (Monthly Average)</div>
+        <h3>Days on Market (Local NY)</h3>
+        <p style="font-size: 13px; color: #888;">This panel links to the live Federal Reserve database for your counties. It tracks "Median Days on Market" from Realtor.com data.</p>
+        <ul style="font-size: 14px; line-height: 2;">
+            <li><a href="https://fred.stlouisfed.org/series/MEDDAYONMAR16015" target="_blank" style="color:#fff;">Chemung County DOM</a></li>
+            <li><a href="https://fred.stlouisfed.org/series/MEDDAYONMAR16101" target="_blank" style="color:#fff;">Steuben County DOM</a></li>
+            <li><a href="https://fred.stlouisfed.org/series/MEDDAYONMAR16097" target="_blank" style="color:#fff;">Schuyler County DOM</a></li>
+        </ul>
+        <div style="margin-top: 20px; font-size: 12px; border-top: 1px solid #333; padding-top: 10px;">
+            <strong style="color:var(--kw-red);">Note:</strong> These links open the real-time FRED charts for each county.
+        </div>
     </div>
 
-    <!-- THE CHART (CANDLESTICKS / DARK MODE) -->
     <div class="chart-main">
-        <div id="tradingview_widget"></div>
-        <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-        <script type="text/javascript">
-        new TradingView.widget({
-          "width": "100%",
-          "height": "100%",
-          "symbol": "TVC:US10Y",
-          "interval": "D",
-          "timezone": "Etc/UTC",
-          "theme": "dark",
-          "style": "1", // 1 = Candles
-          "locale": "en",
-          "toolbar_bg": "#f1f3f6",
-          "enable_publishing": false,
-          "hide_side_toolbar": false,
-          "allow_symbol_change": true,
-          "details": true,
-          "hotlist": true,
-          "calendar": true,
-          "container_id": "tradingview_widget"
-        });
-        </script>
+        <div class="tradingview-widget-container" style="height:100%;width:100%">
+          <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+          {
+          "autosize": true, "symbol": "TVC:US10Y", "interval": "D", "timezone": "Etc/UTC", "theme": "dark", "style": "1",
+          "locale": "en", "enable_publishing": false, "allow_symbol_change": true, "calendar": false, "support_host": "https://www.tradingview.com"
+        }
+          </script>
+        </div>
     </div>
 </div>
 
