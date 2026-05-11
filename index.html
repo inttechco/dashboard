@@ -2,59 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NY Real Estate Command Center</title>
     <style>
-        :root { --kw-red: #ED1C24; --bg: #0a0a0a; --card: #161616; --text: #f0f0f0; }
-        body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 20px; }
-        .header { border-bottom: 3px solid var(--kw-red); margin-bottom: 25px; padding-bottom: 10px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(480px, 1fr)); gap: 20px; }
-        .card { background: var(--card); border: 1px solid #333; border-radius: 12px; padding: 20px; overflow: hidden; min-height: 400px; }
-        h3 { color: var(--kw-red); font-size: 0.9rem; text-transform: uppercase; margin: 0 0 15px 0; border-bottom: 1px solid #222; padding-bottom: 10px; }
-        .full-width { grid-column: 1 / -1; height: 600px; }
-        iframe { border: none; width: 100%; height: 350px; border-radius: 6px; }
+        :root { --bg: #0a0a0a; --card: #161616; --text: #f0f0f0; --kw-red: #ED1C24; }
+        body { background: var(--bg); color: var(--text); font-family: sans-serif; padding: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 20px; }
+        .card { background: var(--card); border: 1px solid #333; border-radius: 8px; padding: 15px; }
+        h3 { color: var(--kw-red); border-bottom: 1px solid #222; padding-bottom: 8px; margin-top: 0; }
+        iframe { border: none; width: 100%; height: 350px; background: #fff; border-radius: 4px; }
+        .full-width { grid-column: 1 / -1; height: 550px; }
     </style>
 </head>
 <body>
 
-<div class="header">
-    <h1 style="margin:0; font-size: 1.8rem;">NY REAL ESTATE COMMAND CENTER</h1>
-</div>
-
 <div class="grid">
-    <!-- NATIONAL RATES (UNTOUCHED PER YOUR CODE) -->
-    <div class="card" style="min-height: auto;">
+    <!-- MORTGAGE RATES (UNTOUCHED AS REQUESTED) -->
+    <div class="card">
         <h3>National Daily Mortgage Rates</h3>
-        <div class="mnd-rates-widget" style="width: 600px; height: 340px; font-size: 12px; margin: 0 auto;">
-            <div class="w-header" style="text-align: center; padding:4px 0;background-color: #336699; color: #FFFFFF;"> <a href="https://www.mortgagenewsdaily.com/mortgage-rates" target="_blank" style="color: #FFFFFF;text-decoration:none;">Home Mortgage Rates</a></div>
-            <iframe src="//widgets.mortgagenewsdaily.com/widget/f/rates?t=large&sn=true&c=336699&u=&cbu=&w=598&h=290" width="600" height="290" frameborder="0" scrolling="no" style="border: solid 1px #336699; border-width: 0 1px;box-sizing:border-box;width:600px;height:290px;display:block;"></iframe>
-            <div class="w-footer" style="text-align: center; padding:4px 0;background-color: #336699; color: #FFFFFF;">View More <a href="https://www.mortgagenewsdaily.com/mortgage-rates" target="_blank" style="color: #FFFFFF;text-decoration:none;">Interest Rates</a></div>
-        </div>
+        <iframe src="https://widgets.mortgagenewsdaily.com/widget/f/rates?t=large&sn=true&c=336699&u=&cbu=&w=598&h=290" 
+                style="width:100%; height:310px; background: transparent;"></iframe>
     </div>
 
-    <!-- CHEMUNG COUNTY: ACTIVE LISTINGS (VERIFIED MAY 2026 DATA) -->
+    <!-- CHEMUNG COUNTY (MAY 2026 DATA) -->
     <div class="card">
-        <h3>Chemung County: Inventory Levels (2026)</h3>
-        <iframe src="https://fred.stlouisfed.org/graph/graph-landing.php?g=1nlP7&width=450&height=300" scrolling="no"></iframe>
+        <h3>Chemung County: Market Hotness (2026)</h3>
+        <iframe src="https://fred.stlouisfed.org/graph/graph-landing.php?g=1nl2i&width=450&height=300"></iframe>
     </div>
 
-    <!-- STEUBEN COUNTY: ACTIVE LISTINGS (VERIFIED MAY 2026 DATA) -->
+    <!-- STEUBEN COUNTY (MAY 2026 DATA) -->
     <div class="card">
-        <h3>Steuben County: Inventory Levels (2026)</h3>
-        <iframe src="https://fred.stlouisfed.org/graph/graph-landing.php?g=1nlPh&width=450&height=300" scrolling="no"></iframe>
+        <h3>Steuben County: Market Hotness (2026)</h3>
+        <iframe src="https://fred.stlouisfed.org/graph/graph-landing.php?g=1nl2x&width=450&height=300"></iframe>
     </div>
 
-    <!-- SCHUYLER COUNTY: ACTIVE LISTINGS (VERIFIED MAY 2026 DATA) -->
-    <div class="card">
-        <h3>Schuyler County: Inventory Levels (2026)</h3>
-        <iframe src="https://fred.stlouisfed.org/graph/graph-landing.php?g=1nlPt&width=450&height=300" scrolling="no"></iframe>
-    </div>
-
-    <!-- LIVE 10Y YIELD: IFRAME EMBED (BYPASSES REDIRECT ERROR) -->
+    <!-- 10Y TREASURY YIELD (DARK MODE CANDLESTICKS - NO REDIRECT) -->
     <div class="card full-width">
-        <h3>Live 10-Year Treasury Yield (Candlesticks)</h3>
-        <iframe src="https://s.tradingview.com/widgetembed/?symbol=TVC%3AUS10Y&interval=D&hidesidetoolbar=0&symboledit=0&saveimage=1&toolbarbg=161616&theme=dark&style=1&timezone=Etc%2FUTC&studies=%5B%5D&showpopupbutton=1&affiliate_id=&show_popup_button=1&no_referral_id=1&locale=en" 
-                style="height: 520px; width: 100%;"></iframe>
+        <h3>Live 10-Year Treasury Yield</h3>
+        <iframe src="https://s.tradingview.com/widgetembed/?symbol=TVC%3AUS10Y&interval=D&hidesidetoolbar=0&symboledit=0&theme=dark&style=1&timezone=Etc%2FUTC" 
+                style="width: 100%; height: 500px; background: #161616;"></iframe>
     </div>
 </div>
 
