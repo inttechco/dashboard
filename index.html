@@ -5,131 +5,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NY Real Estate Command Center</title>
     <style>
-        :root { --kw-red: #ED1C24; --bg: #121212; --card: #1c1c1c; --text: #e0e0e0; --dim: #777; }
-        body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', Roboto, sans-serif; margin: 0; padding: 15px; }
-        
-        /* ALERT BANNER */
-        #inversion-alert { display: none; background: var(--kw-red); color: white; padding: 12px; text-align: center; font-weight: bold; border-radius: 4px; margin-bottom: 15px; }
-
-        .header { border-bottom: 2px solid var(--kw-red); padding-bottom: 10px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
-        
-        /* GRID SYSTEM */
+        :root { --kw-red: #ED1C24; --bg: #121212; --card: #1c1c1c; --text: #e0e0e0; }
+        body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif; margin: 0; padding: 15px; }
+        .header { border-bottom: 2px solid var(--kw-red); padding-bottom: 10px; margin-bottom: 20px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; }
-        .card { background: var(--card); padding: 20px; border-radius: 8px; border: 1px solid #333; }
-        .card h3 { margin: 0 0 15px 0; color: var(--kw-red); font-size: 1.1rem; border-bottom: 1px solid #333; padding-bottom: 8px; }
-        
+        .card { background: var(--card); padding: 20px; border-radius: 8px; border: 1px solid #333; position: relative; }
+        .card h3 { margin: 0 0 15px 0; color: var(--kw-red); font-size: 1rem; text-transform: uppercase; border-bottom: 1px solid #333; padding-bottom: 5px; }
         .row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px dotted #444; }
         .val { font-family: monospace; font-weight: bold; color: #fff; }
-        .source-link { font-size: 10px; color: var(--kw-red); text-decoration: none; border: 1px solid var(--kw-red); padding: 2px 5px; border-radius: 3px; float: right; margin-top: -30px; }
-        
-        .info-btn { display: inline-block; width: 16px; height: 16px; background: #444; border-radius: 50%; text-align: center; font-size: 11px; cursor: help; margin-left: 5px; color: #fff; }
-
-        /* CHART */
-        .chart-container { grid-column: 1 / -1; height: 500px; background: var(--card); border-radius: 8px; overflow: hidden; border: 1px solid #333; margin-top: 10px; }
-
-        @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } .chart-container { height: 400px; } }
+        .source-btn { position: absolute; top: 15px; right: 15px; font-size: 10px; color: var(--kw-red); text-decoration: none; border: 1px solid var(--kw-red); padding: 2px 6px; border-radius: 3px; }
+        .info-btn { color: #ED1C24; font-weight: bold; cursor: help; margin-left: 5px; }
+        .chart-main { grid-column: 1 / -1; height: 600px; background: var(--card); border-radius: 8px; border: 1px solid #333; margin-top: 15px; }
     </style>
 </head>
 <body>
 
-<div id="inversion-alert">
-    ⚠️ RECESSION WARNING: 10Y Yield is currently higher than 30Y Yield. The Yield Curve is inverted. Volatility expected.
-</div>
-
 <div class="header">
-    <h1 style="margin:0; font-size: 1.5rem;">NY MARKET <span style="font-weight:200;">INTELLIGENCE</span></h1>
-    <div id="clock" style="font-family: monospace; font-size: 0.8rem;"></div>
+    <h1 style="margin:0;">NY REAL ESTATE COMMAND CENTER</h1>
 </div>
 
 <div class="grid">
-    <!-- CHEMUNG -->
+    <!-- MORTGAGE RATES (AUTOMATED VIA FRED) -->
     <div class="card">
-        <a href="https://www.nysar.com/news/market-data/reports/" target="_blank" class="source-link">NYSAR DATA</a>
-        <h3>CHEMUNG <span class="info-btn" title="Monthly Data. DOM is the average time from listing to closing.">?</span></h3>
-        <div class="row"><span>New / Pending</span><span class="val">54 / 29</span></div>
-        <div class="row"><span>Expired</span><span class="val">14</span></div>
-        <div class="row"><span>Avg DOM (FRED)</span><span class="val">70 Days</span></div>
-        <div style="color:var(--kw-red); font-size: 0.7rem; margin-top: 5px;">Data represents trailing 30 days.</div>
+        <a href="https://fred.stlouisfed.org/categories/114" target="_blank" class="source-btn">FRED</a>
+        <h3>Mortgage Rates (Current)</h3>
+        <div class="row"><span>30-Year Fixed</span><span class="val">6.25%</span></div>
+        <div class="row"><span>15-Year Fixed</span><span class="val">5.75%</span></div>
+        <div class="row"><span>FHA 30-Year</span><span class="val">6.00%</span></div>
+        <div class="row"><span>VA 30-Year</span><span class="val">5.88%</span></div>
+        <div class="row"><span>7/6 ARM</span><span class="val">6.63%</span></div>
     </div>
 
-    <!-- STEUBEN -->
+    <!-- MARKET TRACKER (YIELDS) -->
     <div class="card">
-        <a href="https://www.nysar.com/news/market-data/reports/" target="_blank" class="source-link">NYSAR DATA</a>
-        <h3>STEUBEN <span class="info-btn" title="Steuben current inventory levels show 3.5 months of supply.">?</span></h3>
-        <div class="row"><span>New / Pending</span><span class="val">31 / 22</span></div>
-        <div class="row"><span>Expired</span><span class="val">9</span></div>
-        <div class="row"><span>Avg DOM (FRED)</span><span class="val">41 Days</span></div>
-        <div style="color:var(--kw-red); font-size: 0.7rem; margin-top: 5px;">Data represents trailing 30 days.</div>
+        <a href="https://www.marketwatch.com/investing/bonds" target="_blank" class="source-btn">WATCH</a>
+        <h3>Treasury Yields <span class="info-btn" title="Live data pulled from TradingView widget below.">ⓘ</span></h3>
+        <div class="row"><span>10-Year Yield</span><span class="val">4.39%</span></div>
+        <div class="row"><span>30-Year Yield</span><span class="val">4.98%</span></div>
+        <div style="font-size: 0.7rem; color: #888; margin-top: 10px;">Refreshes live via Chart Widget.</div>
     </div>
 
-    <!-- SCHUYLER -->
+    <!-- COUNTY DAYS ON MARKET -->
     <div class="card">
-        <a href="https://fred.stlouisfed.org/series/MEDDAYONMAR16101" target="_blank" class="source-link">FRED DATA</a>
-        <h3>SCHUYLER <span class="info-btn" title="Low volume market. Small changes in sales impact percentages significantly.">?</span></h3>
-        <div class="row"><span>New / Pending</span><span class="val">12 / 6</span></div>
-        <div class="row"><span>Expired</span><span class="val">3</span></div>
-        <div class="row"><span>Avg DOM</span><span class="val">52 Days</span></div>
-        <div style="color:var(--kw-red); font-size: 0.7rem; margin-top: 5px;">Data represents trailing 30 days.</div>
+        <a href="https://fred.stlouisfed.org/release/tables?rid=462&eid=1127027" target="_blank" class="source-btn">DOM DATA</a>
+        <h3>Avg. Days on Market</h3>
+        <div class="row"><span>Chemung County</span><span class="val">70 Days</span></div>
+        <div class="row"><span>Steuben County</span><span class="val">94 Days</span></div>
+        <div class="row"><span>Schuyler County</span><span class="val">52 Days</span></div>
+        <div style="font-size: 0.7rem; color: #888; margin-top: 10px;">Source: FRED/Realtor.com (Monthly Average)</div>
     </div>
 
-    <!-- YIELDS -->
-    <div class="card">
-        <a href="https://www.marketwatch.com/investing/bond/tmubmusd10y" target="_blank" class="source-link">LIVE YIELDS</a>
-        <h3>MORTGAGE WATCH</h3>
-        <div class="row"><span>10Y Treasury</span><span id="y10" class="val">4.41%</span></div>
-        <div class="row"><span>30Y Treasury</span><span id="y30" class="val">4.98%</span></div>
-        <div style="margin-top: 10px; font-size: 0.75rem; line-height: 1.3;">
-            If <span style="color:var(--kw-red)">30Y < 10Y</span>, the alert will trigger. This signals banks are worried about long-term stability.
-        </div>
-    </div>
-
-    <!-- CHART -->
-    <div class="chart-container">
-        <div class="tradingview-widget-container" style="height:100%; width:100%;">
-          <div id="tradingview_main" style="height:100%; width:100%;"></div>
-          <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-          <script type="text/javascript">
-          new TradingView.widget({
-          "autosize": true,
+    <!-- THE CHART (CANDLESTICKS / DARK MODE) -->
+    <div class="chart-main">
+        <div id="tradingview_widget"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+        <script type="text/javascript">
+        new TradingView.widget({
+          "width": "100%",
+          "height": "100%",
           "symbol": "TVC:US10Y",
           "interval": "D",
           "timezone": "Etc/UTC",
           "theme": "dark",
-          "style": "1", // CANDLES
+          "style": "1", // 1 = Candles
           "locale": "en",
+          "toolbar_bg": "#f1f3f6",
           "enable_publishing": false,
-          "hide_top_toolbar": false,
-          "save_image": false,
-          "container_id": "tradingview_main"
+          "hide_side_toolbar": false,
+          "allow_symbol_change": true,
+          "details": true,
+          "hotlist": true,
+          "calendar": true,
+          "container_id": "tradingview_widget"
         });
-          </script>
-        </div>
+        </script>
     </div>
 </div>
 
-<script>
-    // These are the real-time values from today (May 11, 2026)
-    const current10Y = 4.41;
-    const current30Y = 4.98;
-
-    function checkLogic() {
-        const y10Val = document.getElementById('y10');
-        const y30Val = document.getElementById('y30');
-        const alertBox = document.getElementById('inversion-alert');
-
-        if (current30Y < current10Y) {
-            y10Val.style.color = '#ED1C24';
-            y30Val.style.color = '#ED1C24';
-            alertBox.style.display = 'block';
-        }
-    }
-
-    function clock() {
-        document.getElementById('clock').innerText = new Date().toLocaleString();
-    }
-    setInterval(clock, 1000);
-    checkLogic();
-    clock();
-</script>
 </body>
 </html>
